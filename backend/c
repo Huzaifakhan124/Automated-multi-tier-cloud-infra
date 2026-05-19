@@ -1,0 +1,48 @@
+from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS  # <--- Ye naya add kiya
+import requests
+
+app = Flask(__name__)
+CORS(app) # <--- Ye line frontend ka rasta kholegi
+#dummy database data
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE?sslmode=require'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# Database Table Structure
+class Activity(db.Model):
+    __tablename__ = 'api_data' # <--- Taake PG Studio mein asani se mil jaye
+    id = db.Column(db.Integer, primary_key=True)
+    task = db.Column(db.String(500))
+    category = db.Column(db.String(100))
+
+# Table Banane ka Function
+with app.app_context():
+    db.create_all()
+
+@app.route('/')
+def home():
+    return jsonify({"message": "Backend is running! Now go to /fetch to save data."})
+
+@app.route('/fetch')
+def fetch_and_save():
+    try:
+        response = requests.get('https://official-joke-api.appspot.com/random_joke')
+        data = response.json()
+        
+        new_entry = Activity(task=data['setup'], category=data['punchline'])
+        db.session.add(new_entry)
+        db.session.commit()
+        
+        return jsonify({
+            "status": "Success! Saved in Aiven huzaifa DB",
+            "setup": data['setup'],
+            "punchline": data['punchline']
+        })
+    except Exception as e:
+        return jsonify({"status": "Error", "message": str(e)})
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)

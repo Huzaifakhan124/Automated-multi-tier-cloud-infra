@@ -1,0 +1,5 @@
+.terraform/
+*.tfstate*
+*.zip
+my-aws-key
+terraform-provider-aws*
