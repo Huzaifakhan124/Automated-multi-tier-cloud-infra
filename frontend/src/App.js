@@ -20,9 +20,9 @@ function App() {
 
       console.log("Backend Response:", response.data);
 
-      // Check kar rahe hain ke response mein 'status' Success hai ya nahi
+      // 'status' 
       if (response.data.status === "Success") {
-        // Agar backend se message nahi bhi aata, to hum khud ka success message dikhayenge
+        
         const successMsg = response.data.message || "Data Saved to Aiven DB!";
         setStatus(`✅ Success: ${successMsg}`);
       } else {

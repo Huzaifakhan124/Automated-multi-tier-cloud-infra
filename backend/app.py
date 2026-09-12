@@ -5,9 +5,9 @@ from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
-CORS(app)  # Frontend se connection allow karne ke liye
+CORS(app)  
 
-# Database dummy data
+#  dummy data
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE?sslmode=require'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -29,18 +29,17 @@ with app.app_context():
 def home():
     return jsonify({"message": "Backend is running!"})
 
-# --- YE HAI WO ROUTE JO DASHBOARD KO CHAHIYE ---
+#dashboard
 @app.route('/start-task', methods=['POST'])
 def start_task():
     try:
         data = request.json
         api_url = data.get('api_url', 'https://official-joke-api.appspot.com/random_joke')
-        
-        # Dashboard se data lekar console par print karein
+       
+        #print
         print(f"Data received from Frontend: {data}")
 
-        # Ek dafa data fetch karke DB mein save karna test ke liye
-        response = requests.get(api_url)
+        # data fetch 
         joke_data = response.json()
         
         new_entry = Activity(
@@ -59,7 +58,7 @@ def start_task():
         print(f"Error: {e}")
         return jsonify({"status": "Error", "message": str(e)}), 500
 
-# Purana fetch route bhi rakhte hain testing ke liye
+# old fetch 
 @app.route('/start-fetch')
 def fetch_and_save():
     response = requests.get('https://official-joke-api.appspot.com/random_joke')

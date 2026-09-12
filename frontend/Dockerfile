@@ -1,18 +1,19 @@
-# Step 1: Node image use karein
+# Node image 
 FROM node:18-alpine
 
-# Step 2: Work directory set karein
+#Work directory 
 WORKDIR /app
 
-# Step 3: Dependencies install karein
+#Dependencies 
+
 COPY package*.json ./
 RUN npm install
 
-# Step 4: Saara code copy karein
+# copying
 COPY . .
 
-# Step 5: Port 3000 expose karein
+# expose port
 EXPOSE 3000
 
-# Step 6: React app start karein
+# by defult command
 CMD ["npm", "start"]
