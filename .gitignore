@@ -3,3 +3,5 @@
 *.zip
 my-aws-key
 terraform-provider-aws*
+.env
+backend/.env

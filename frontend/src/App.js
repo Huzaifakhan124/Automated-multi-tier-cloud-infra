@@ -22,7 +22,7 @@ function App() {
 
       // 'status' 
       if (response.data.status === "Success") {
-        
+
         const successMsg = response.data.message || "Data Saved to Aiven DB!";
         setStatus(`✅ Success: ${successMsg}`);
       } else {
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div style={{ padding: '50px', fontFamily: 'Arial', textAlign: 'center' }}>
-      <h1 style={{ color: '#2c3e50' }}>Huzaifa's DevOps Project Dashboard</h1>
+      <h1 style={{ color: '#2c3e50' }}>Huzaifas DevOps Project Dashboard</h1>
       <div style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'left', background: '#f4f4f4', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
         
         <label style={{ fontWeight: 'bold' }}>API URL:</label>
