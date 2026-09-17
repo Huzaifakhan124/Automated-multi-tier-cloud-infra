@@ -17,8 +17,6 @@ A production-grade, highly scalable multi-tier web application infrastructure pr
 ## 📐 Architecture & Data Flow Diagram
 
 
-## 📐 Architecture & Data Flow Diagram
-
 ```mermaid
 graph TD
     User([User / Browser]) -->|HTTP Port 3000| ALB[AWS Load Balancer]
@@ -45,6 +43,9 @@ graph TD
     TF -.->|State File| S3[(S3 Remote Backend)]
     TF -.->|State Locking| DDB[(DynamoDB Table)]
 
+    ```
+
+    
 
 📂 Project Directory Structure
 
