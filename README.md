@@ -43,7 +43,7 @@ graph TD
 ```
 
 📂 Project Directory Structure
-
+```text
 
     Automated-multi-tier-cloud-infra/
 ├── .github/
@@ -75,7 +75,7 @@ graph TD
 │   └── vpc.tf                # Networking, subnets & gateways
 ├── docker-compose.yml        # Multi-container orchestration
 └── README.md                 # Project documentation
-
+```
 
 
 
