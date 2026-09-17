@@ -41,6 +41,7 @@ graph TD
     TF -.->|State File| S3[(S3 Remote Backend)]
     TF -.->|State Locking| DDB[(DynamoDB Table)]
     ```
+    
 📂 Project Directory Structure
 
 
