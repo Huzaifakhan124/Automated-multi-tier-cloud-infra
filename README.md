@@ -18,37 +18,32 @@ A production-grade, highly scalable multi-tier web application infrastructure pr
 
 ```mermaid
 graph TD
-    User([User / Browser]) -->|HTTP Request port 3000| ALB[AWS Application Load Balancer]
+    User([User / Browser]) -->|HTTP Port 3000| ALB[AWS Load Balancer]
     
-    subgraph AWS Cloud Infrastructure (Provisioned via Terraform)
-        subgraph VPC [AWS VPC]
-            SG[Security Groups / Firewalls]
-            
-            subgraph EC2 [EC2 Instance - Ubuntu 22.04]
-                subgraph Docker [Docker Compose Engine]
-                    FE[React Frontend <br/> Port: 3000]
-                    BE[Flask Backend API <br/> Port: 5000]
-                end
-            end
+    subgraph AWS_Cloud [AWS Cloud Infrastructure via Terraform]
+        VPC[AWS VPC Network]
+        SG[Security Groups]
+        
+        subgraph EC2_Server [EC2 Instance Ubuntu]
+            Docker[Docker Compose Engine]
+            FE[React Frontend]
+            BE[Flask Backend API]
         end
     end
 
     ALB --> FE
-    FE -->|API Request to save/fetch jokes| BE
-    BE -->|Store & Fetch Data| DB[(Application Database)]
+    FE -->|API Request| BE
+    BE -->|Save Data| DB[(Application DB)]
     
     %% Terraform Infrastructure & State Management
     TF[Terraform IaC] -.->|Provisions| VPC
-    TF -.->|Provisions| EC2
+    TF -.->|Provisions| EC2_Server
     TF -.->|Provisions| ALB
-    TF -.->|Provisions| SG
-    
-    %% Backend Storage for Terraform State
     TF -.->|State File| S3[(S3 Remote Backend)]
     TF -.->|State Locking| DDB[(DynamoDB Table)]
 
 
-
+    
 📂 Project Directory Structure
 
 
